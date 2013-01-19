@@ -38,7 +38,7 @@ python regextweet.py --u repsguntweets --l members-of-congress --o cspan --r "(g
 If you want to try out `regextweet.py` simply download the repository,  navigate to the extracted folder and customize `api.txt` and `handles.txt` according to your preferences.  Before running `regextweet.py`, make sure to run:
 
 ```
-  sudo pip install tweepy oauth2 requests
+sudo pip install tweepy oauth2 requests
 ```
 
 which should cover the necessary dependencies.

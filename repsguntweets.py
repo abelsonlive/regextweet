@@ -45,7 +45,7 @@ for person in follower_list:
 #END_OF_CHUNK________________________________________________________________#
 
 # THIS IS THE TWEET BOT
-authenticate
+# authenticate
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
