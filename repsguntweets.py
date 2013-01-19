@@ -80,7 +80,9 @@ while 1:
             filtered_tweets.append([id_str, name, text])
 
     # if we found a tweet, continue
-    if len(ft) > 0:
+    if len(filtered_tweets) == 0:
+        print "no relevant tweets found"
+    else :
         # retweet relevant tweets, reverse list to send out oldest messages first
         for ft in reversed(filtered_tweets):
 
@@ -107,8 +109,6 @@ while 1:
                 # rapid iterations should catch all relvant tweets
                 except:
                     pass
-    else:
-        print "no relevant tweets found"
 
     # wait 5 minutes before starting again
     time.sleep(300)

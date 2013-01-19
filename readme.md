@@ -28,12 +28,12 @@ where:
 
 So for [RepsGunTweets](http://twitter.com/RepsGunTweets), where we retweeted from a the list named "members-of-congress" under [CSPAN's](http://www.twitter.com/cspan) account, we simply typed:
 
-```python retweety.py --u repsguntweets --l members-of-congress --o cspan --r "(gun)"```
+```python regextweet.py --u repsguntweets --l members-of-congress --o cspan --r "(gun)"```
 
 
 ### Make your own tweetbot
 
-If you want to try out `retweety.py` simply go to the [github page](http://www.github.com/abelsonlive/retweety) and download the repository.  Navigate to the downloaded and extracted folder and customized `api.txt` and `handles.txt` according to your preferences.  Before running `retweety.py`, make sure to run:
+If you want to try out `retweety.py` simply go to the [github page](http://www.github.com/abelsonlive/regextweet) and download the repository.  Navigate to the downloaded folder and customize `api.txt` and `handles.txt` according to your preferences.  Before running `regextweet.py`, make sure to run:
 
 ```
   sudo pip install tweepy oauth2 requests
