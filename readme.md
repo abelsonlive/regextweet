@@ -12,7 +12,7 @@ access_token_secret
 With `regextweet` we can quickly follow a list, filter information of interest, and retweet it. Here's the usage template:
 
 ```
-python python regextweet.py --u user_name --l list_name --o list_owner --r "regex" --a api.txt --h handles.txt
+python regextweet.py --u user_name --l list_name --o list_owner --r "regex" --a api.txt --h handles.txt
 ```
 
 where:
