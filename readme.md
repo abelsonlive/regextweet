@@ -28,7 +28,9 @@ where:
 
 So for [RepsGunTweets](http://twitter.com/RepsGunTweets), where we retweeted from a the list named "members-of-congress" under [CSPAN's](http://www.twitter.com/cspan) account, we simply typed:
 
-```python regextweet.py --u repsguntweets --l members-of-congress --o cspan --r "(gun)"```
+```
+python regextweet.py --u repsguntweets --l members-of-congress --o cspan --r "(gun)"
+```
 
 
 ### Make your own tweetbot
@@ -43,7 +45,9 @@ which should cover the necessary dependencies.
 
 Now you can create an account called "biebergoestowashington" and retweet every time a representative mentions justin bieber by simply typing:
 
-```python regextweet.py --u biebergoestowashington --l members-of-congress --o cspan --r "(bieber)"```
+```
+python regextweet.py --u biebergoestowashington --l members-of-congress --o cspan --r "(bieber)"
+```
 
 ## TODO
 
