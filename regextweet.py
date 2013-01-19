@@ -107,8 +107,12 @@ if o is None:
 
 # # RETWEET FOREVER # #
 
+# generate list url
+list_url = "http://api.twitter.com/1/lists/statuses.json?slug=%s&owner_screen_name=%s&per_page=100&page=1&include_entities=true" % (list_name, owner)
+
 # initialize a list for logging what the bot has tweeted
 tweeted = []
+
 print  "now following: " + list_name + " by " + owner
 while 1:
 
@@ -127,40 +131,36 @@ while 1:
         if re.search(regex, text.lower()):
             filtered_tweets.append([id_str, name, text])
 
-    # retweet relevant tweets, reverse list to send out oldest messages first
-    for ft in reversed(filtered_tweets):
+    # if we found a tweet, continue
+    if len(filtered_tweets) == 0:
+        print "no relevant tweets found @", datetime.now()
+    else:
+        # retweet relevant tweets, reverse list to send out oldest messages first
+        for ft in reversed(filtered_tweets):
 
-        # extract the relvant tweet's id
-        the_id = ft[0]
+            # extract the relvant tweet's id
+            the_id = ft[0]
 
-        # check if this id has not been tweeted yet - turns out twitter prevents this anyways.
-        # i suppose this might save on api calls though
-        if the_id not in tweeted:
-            try:
-                # print tweet to console
-                print str(datetime.now()) + ", " + ft[1] + ": " + ft[2]
+            # check if this id has not been tweeted yet - turns out twitter prevents this anyways.
+            # i suppose this might save on api calls though
+            if the_id not in tweeted:
+                try:
+                    # print tweet to console
+                    print str(datetime.now()) + ", " + ft[1] + ": " + ft[2]
 
-                # retweet via authenticated twitter handle
-                api.retweet(the_id)
+                    # retweet via authenticated twitter handle
+                    api.retweet(the_id)
 
-                # log the id of the tweet
-                tweeted.append(the_id)
+                    # log the id of the tweet
+                    tweeted.append(the_id)
 
-                # if --d is flagged, dump to file "tweets.txt"
-                d = re.search("--d true", arg_string)
-                if d is not none:
-                    file = open("tweets.txt", "r")
-                    new_line = the_id + "\n"
-                    file.write(new_line)
-                    file.close()
+                    # take a break
+                    time.sleep(1)
 
-                # take a break
-                time.sleep(1)
-
-            # if anything goes wrong just move on.
-            # rapid iterations should catch all relvant tweets
-            except:
-                pass
+                # if anything goes wrong just move on.
+                # rapid iterations should catch all relvant tweets
+                except:
+                    pass
 
 
     # wait 5 minutes before starting again

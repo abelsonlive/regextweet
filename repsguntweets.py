@@ -79,32 +79,36 @@ while 1:
         if re.search(regex, text.lower()):
             filtered_tweets.append([id_str, name, text])
 
-    # retweet relevant tweets, reverse list to send out oldest messages first
-    for ft in reversed(filtered_tweets):
+    # if we found a tweet, continue
+    if len(ft) > 0:
+        # retweet relevant tweets, reverse list to send out oldest messages first
+        for ft in reversed(filtered_tweets):
 
-        # extract the relvant tweet's id
-        the_id = ft[0]
+            # extract the relvant tweet's id
+            the_id = ft[0]
 
-        # check if this id has not been tweeted yet - turns out twitter prevents this anyways.
-        # i suppose this might save on api calls though
-        if the_id not in tweeted:
-            try:
-                # print tweet to console
-                print str(datetime.now()) + ", " + ft[1] + ": " + ft[2]
+            # check if this id has not been tweeted yet - turns out twitter prevents this anyways.
+            # i suppose this might save on api calls though
+            if the_id not in tweeted:
+                try:
+                    # print tweet to console
+                    print str(datetime.now()) + ", " + ft[1] + ": " + ft[2]
 
-                # retweet via authenticated twitter handle
-                api.retweet(the_id)
+                    # retweet via authenticated twitter handle
+                    api.retweet(the_id)
 
-                # log the id of the tweet
-                tweeted.append(the_id)
+                    # log the id of the tweet
+                    tweeted.append(the_id)
 
-                # take a break
-                time.sleep(1)
+                    # take a break
+                    time.sleep(1)
 
-            # if anything goes wrong just move on.
-            # rapid iterations should catch all relvant tweets
-            except:
-                pass
+                # if anything goes wrong just move on.
+                # rapid iterations should catch all relvant tweets
+                except:
+                    pass
+    else:
+        print "no relevant tweets found"
 
     # wait 5 minutes before starting again
     time.sleep(300)

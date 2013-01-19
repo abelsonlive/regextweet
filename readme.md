@@ -43,5 +43,5 @@ which should cover the necessary dependencies.
 
 Now you can create an account called "biebergoestowashington" and retweet every time a congress man or woman mentions justin bieber by simply typing:
 
-```python retweety.py --u biebergoestowashington --l members-of-congress --o cspan --r "(bieber)"```
+```python regextweet.py --u biebergoestowashington --l members-of-congress --o cspan --r "(bieber)"```
 
