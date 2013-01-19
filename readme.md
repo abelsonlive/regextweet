@@ -19,7 +19,7 @@ where:
 
 * `--u` defines the user name of the retweetbot
 * `--l` defines the name of the list to follow and filter,
-* `--r` is the regular expression to query the text with.
+* `--r` is the quoted regular expression to query the text with.
 * `--o` is the user name of the person who owns the list (optional; see below)
 * `--a` is the filepath to the textfile with your api credentials (default = "api.txt")
 
