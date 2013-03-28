@@ -114,54 +114,51 @@ list_url = "http://api.twitter.com/1/lists/statuses.json?slug=%s&owner_screen_na
 tweeted = []
 
 print  "now following: " + list_name + " by " + owner
-while 1:
 
-    # download json file of recent tweets
-    r = requests.get(list_url)
-    list_tweets = r.json
 
-    # extract relevant tweets
-    filtered_tweets = []
-    for lt in list_tweets:
-        id_str = lt['id_str'].encode('utf-8')
-        name = lt['user']['screen_name'].encode('utf-8')
-        text = lt['text'].encode('utf-8')
+# download json file of recent tweets
+r = requests.get(list_url)
+list_tweets = r.json
 
-        # apply the regular expression to the tweet text
-        if re.search(regex, text.lower()):
-            filtered_tweets.append([id_str, name, text])
+# extract relevant tweets
+filtered_tweets = []
+for lt in list_tweets:
+    id_str = lt['id_str'].encode('utf-8')
+    name = lt['user']['screen_name'].encode('utf-8')
+    text = lt['text'].encode('utf-8')
 
-    # if we found a tweet, continue
-    if len(filtered_tweets) == 0:
-        print "no relevant tweets found @", datetime.now()
-    else:
-        # retweet relevant tweets, reverse list to send out oldest messages first
-        for ft in reversed(filtered_tweets):
+    # apply the regular expression to the tweet text
+    if re.search(regex, text.lower()):
+        filtered_tweets.append([id_str, name, text])
 
-            # extract the relvant tweet's id
-            the_id = ft[0]
+# if we found a tweet, continue
+if len(filtered_tweets) == 0:
+    print "no relevant tweets found @", datetime.now()
+    
+else:
+    # retweet relevant tweets, reverse list to send out oldest messages first
+    for ft in reversed(filtered_tweets):
 
-            # check if this id has not been tweeted yet - turns out twitter prevents this anyways.
-            # i suppose this might save on api calls though
-            if the_id not in tweeted:
-                try:
-                    # print tweet to console
-                    print str(datetime.now()) + ", " + ft[1] + ": " + ft[2]
+        # extract the relvant tweet's id
+        the_id = ft[0]
 
-                    # retweet via authenticated twitter handle
-                    api.retweet(the_id)
+        # check if this id has not been tweeted yet - turns out twitter prevents this anyways.
+        # i suppose this might save on api calls though
+        if the_id not in tweeted:
+            try:
+                # print tweet to console
+                print str(datetime.now()) + ", " + ft[1] + ": " + ft[2]
 
-                    # log the id of the tweet
-                    tweeted.append(the_id)
+                # retweet via authenticated twitter handle
+                api.retweet(the_id)
 
-                    # take a break
-                    time.sleep(1)
+                # log the id of the tweet
+                tweeted.append(the_id)
+
+                # take a break
+                time.sleep(1)
 
                 # if anything goes wrong just move on.
                 # rapid iterations should catch all relvant tweets
                 except:
                     pass
-
-
-    # wait 5 minutes before starting again
-    time.sleep(300)
