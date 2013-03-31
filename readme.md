@@ -35,7 +35,7 @@ However, this only ran the retweet bot once.
 
 To run it on a continual basis, we created a cron job by writing:
 ```
-sudo crontab -u ec2-user -e
+crontab -e
 ```
 And inserting this line of text at the top of our crontab settings.
 ```
