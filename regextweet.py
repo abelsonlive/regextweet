@@ -108,7 +108,7 @@ if o is None:
 # # RETWEET FOREVER # #
 
 # generate list url
-list_url = "http://api.twitter.com/1/lists/statuses.json?slug=%s&owner_screen_name=%s&per_page=100&page=1&include_entities=true" % (list_name, owner)
+list_url = "http://api.twitter.com/1/lists/statuses.json?slug=%s&owner_screen_name=%s&per_page=1000&page=1&include_entities=true" % (list_name, owner)
 
 # initialize a list for logging what the bot has tweeted
 tweeted = []
