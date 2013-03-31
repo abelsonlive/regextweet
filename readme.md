@@ -26,14 +26,14 @@ where:
 * `--h` is the filepath to the textfile with the list of twitter users to follow (optional; regextweet will not bother with this if `--o` is provided, and will just follow the list `--l` owned by user `--o`.  If neither`--o` nor `--h` are provided, `--h` defaults to "header.txt" . If this is the case and "header.txt" does not exist, the program will break')
 
 
-So for [YourRepsOnGuns](http://twitter.com/YourRepsOnGuns), where we retweeted from a the list named "members-of-congress" under [CSPAN's](http://www.twitter.com/cspan) account, we simply typed:
+So for [YourRepsOnGuns](http://twitter.com/YourRepsOnGuns), where we retweeted from the list named "members-of-congress" under [CSPAN's](http://www.twitter.com/cspan) account, we simply typed:
 
 ```
 python regextweet.py --u yourrepsonguns --l members-of-congress --o cspan --r "(gun)"
 ```
 However, this only ran the retweet bot once.
 
-To run it on a continual basis, we created a cron job on a micro EC2 by writing:
+To run it on a continual basis, we created a cron job by writing:
 ```
 sudo crontab -u ec2-user -e
 ```
@@ -42,7 +42,6 @@ And inserting this line of text at the top of our crontab settings.
 */5 * * * * /usr/bin/python /home/ec2-user/regextweet.py python regextweet.py --u yourrepsonguns --l members-of-congress --o cspan --r "(gun)"
 ```
 Here, the five *'s correspond to minutes, hours, days, months, years, respectively.  Our setting runs the job every 5 minutes forever.
-
 
 ### Make your own tweetbot
 
