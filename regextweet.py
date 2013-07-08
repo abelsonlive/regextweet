@@ -1,4 +1,3 @@
-import requests
 import tweepy
 import oauth2
 import re
