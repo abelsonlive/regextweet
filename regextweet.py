@@ -107,25 +107,14 @@ if o is None:
 
 # # RETWEET FOREVER # #
 
-# generate list url
-list_url = "http://api.twitter.com/1/lists/statuses.json?slug=%s&owner_screen_name=%s&per_page=1000&page=1&include_entities=true" % (list_name, owner)
-
-# initialize a list for logging what the bot has tweeted
-tweeted = []
-
+list_tweets = api.list_timeline(owner_screen_name = owner, slug =  list_name)
 print  "now following: " + list_name + " by " + owner
-
-
-# download json file of recent tweets
-r = requests.get(list_url)
-list_tweets = r.json
-
 # extract relevant tweets
 filtered_tweets = []
 for lt in list_tweets:
-    id_str = lt['id_str'].encode('utf-8')
-    name = lt['user']['screen_name'].encode('utf-8')
-    text = lt['text'].encode('utf-8')
+    id_str = lt.id_str.encode('utf-8')
+    name = lt.user.screen_name.encode('utf-8')
+    text = lt.text.encode('utf-8')
 
     # apply the regular expression to the tweet text
     if re.search(regex, text.lower()):
@@ -160,5 +149,5 @@ else:
 
                 # if anything goes wrong just move on.
                 # rapid iterations should catch all relvant tweets
-                except:
-                    pass
+            except:
+                pass
